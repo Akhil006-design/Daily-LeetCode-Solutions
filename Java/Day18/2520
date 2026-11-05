@@ -1,0 +1,18 @@
+class Solution {
+    public int countDigits(int num) {
+        int sum = 0;
+        int temp = num;
+
+        while (temp > 0) {
+            int digit = temp % 10;
+
+            if (num % digit == 0) {
+                sum++;
+            }
+
+            temp = temp / 10;
+        }
+
+        return sum;
+    }
+}
