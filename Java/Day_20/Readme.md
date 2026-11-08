@@ -1,85 +1,74 @@
-# LeetCode 2535 – Difference Between Element Sum and Digit Sum of an Array
+# LeetCode 2335 – Minimum Amount of Time to Fill Cups
 
 **Difficulty:** Easy  
 **Language:** Java
 
 ## Problem
 
-Given an integer array `nums`, calculate the difference between:
+You are given an array `amount` containing the number of cold, warm, and hot water cups.
 
-- Element Sum: Sum of all elements in the array.
-- Digit Sum: Sum of every individual digit in the array.
+In one second, you can fill either:
+- One cup of any type.
+- Two cups of different types.
 
-Return the absolute difference between these two sums.
+Return the minimum number of seconds required to fill all cups.
 
 ## Java Solution
 
 ```java
 class Solution {
-    public int differenceOfSum(int[] nums) {
-        int elementSum = 0;
-        int digitSum = 0;
+    public int fillCups(int[] amount) {
+        int max = 0;
+        int sum = 0;
 
-        for (int i = 0; i < nums.length; i++) {
-            elementSum += nums[i];
-
-            int temp = nums[i];
-
-            while (temp > 0) {
-                int digit = temp % 10;
-                digitSum += digit;
-                temp = temp / 10;
-            }
+        for (int i = 0; i < amount.length; i++) {
+            sum += amount[i];
+            max = Math.max(max, amount[i]);
         }
 
-        return Math.abs(elementSum - digitSum);
+        return Math.max(max, (sum + 1) / 2);
     }
 }
 ```
 
 ## Algorithm
 
-1. Initialize `elementSum` and `digitSum` to zero.
+1. Initialize `max = 0` and `sum = 0`.
 2. Traverse the array using a `for` loop.
-3. Add each element to `elementSum`.
-4. Store the current element in a temporary variable.
-5. Extract each digit using `% 10`.
-6. Add each digit to `digitSum`.
-7. Remove the last digit using `/ 10`.
-8. Return `Math.abs(elementSum - digitSum)`.
+3. Calculate the total number of cups.
+4. Find the maximum number of cups of one type.
+5. Calculate `(sum + 1) / 2`.
+6. Return the maximum of `max` and `(sum + 1) / 2`.
 
 ## Example
 
 **Input:**
 ```text
-nums = [1, 15, 6, 3]
+amount = [1, 4, 2]
 ```
 
-**Element Sum:**
+**Working:**
 ```text
-1 + 15 + 6 + 3 = 25
-```
+Total cups = 1 + 4 + 2 = 7
+Maximum = 4
 
-**Digit Sum:**
-```text
-1 + 1 + 5 + 6 + 3 = 16
+(sum + 1) / 2 = (7 + 1) / 2 = 4
 ```
 
 **Output:**
 ```text
-9
+4
 ```
 
 ## Complexity Analysis
 
-- **Time Complexity:** O(n × d), where n is the number of array elements and d is the maximum number of digits in an element.
-- **Space Complexity:** O(1), because only a fixed number of variables are used.
+- **Time Complexity:** O(1), because the array always contains exactly three elements.
+- **Space Complexity:** O(1), because only two extra variables are used.
 
 ## Key Concepts Learned
 
-- `for` loop
-- `while` loop
 - Arrays
-- Modulo operator (`%`)
-- Integer division (`/`)
-- `Math.abs()` method
+- For loop
+- Maximum value using `Math.max()`
+- Sum calculation
+- Mathematical problem solving
